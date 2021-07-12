@@ -1,0 +1,37 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Modules
+node_modules
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# IDE
+.idea
+.vscode
+.DS_Store
+
+# dotenv environment variables file
+.env
+
+# Caches
+.npm
+.eslintcache
+
+# Swagger 
+tsoa/swagger.json
+app/http/routes.ts
+
+# Output
+dist
