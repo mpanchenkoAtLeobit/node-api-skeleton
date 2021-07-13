@@ -2,6 +2,4 @@ node_modules
 dist
 
 # Swagger 
-tsoa/swagger.json
-tsoa/tsoa-template.ts
-app/http/routes.ts
+src/http/routes.ts

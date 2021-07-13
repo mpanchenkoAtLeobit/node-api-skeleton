@@ -1,14 +1,19 @@
 {
+  "entryFile": "./src/index.ts",
+  "noImplicitAdditionalProperties": "silently-remove-extras",
   "swagger": {
     "basePath": "/api",
     "outputDirectory": "./tsoa",
     "entryFile": "./src/index.ts"
   },
+  "spec": {
+    "outputDirectory": "./tsoa",
+    "basePath": "/api"
+  },
   "routes": {
     "basePath": "/api",
-    "entryFile": "./src/index.ts",
     "routesDir": "./src/http",
-    "middlewareTemplate": "./tsoa/tsoa-template.ts",
+    "middleware": "express",
     "authenticationModule": "./src/http/middleware/authentication.ts"
   }
 }

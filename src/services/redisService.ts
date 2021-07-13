@@ -1,33 +1,25 @@
 import { Config } from '../../config';
-import redis, { RedisClient } from 'redis';
+import { createNodeRedisClient, WrappedNodeRedisClient  } from 'handy-redis';
 import { Inject, Singleton } from 'typescript-ioc';
 
 @Singleton
 class RedisService {
-  private redis: RedisClient;
+  private redis: WrappedNodeRedisClient;
   private redisUrl: string;
 
   constructor(@Inject config: Config) {
     this.redisUrl = config.redis.url;
-    this.redis = redis.createClient({
+    this.redis = createNodeRedisClient({
       url: this.redisUrl,
     });
   }
 
-  getClient(): RedisClient {
+  getClient(): WrappedNodeRedisClient {
     return this.redis;
   }
 
-  ping(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.redis.ping((err) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      });
-    });
+  ping(): Promise<string> {
+    return this.redis.ping();
   }
 
   async close(): Promise<void> {

@@ -1,8 +1,7 @@
 import Joi from '@hapi/joi';
-//todo
 //import joiDate from '@hapi/joi-date';
-
-const JoiExtended = Joi.extend();
+import joiDate from '@joi/date';
+const JoiExtended = Joi.extend(joiDate);
 
 export abstract class AbstractInputValidationsSchema {
   protected getPkSchema(): Joi.NumberSchema {

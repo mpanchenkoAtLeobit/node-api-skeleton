@@ -17,16 +17,14 @@
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
-        //"emitDecoratorMetadata": true,
-        "suppressImplicitAnyIndexErrors": true,
+        "emitDecoratorMetadata": true,
+        //"suppressImplicitAnyIndexErrors": true,
         "resolveJsonModule": true,
         "sourceMap": true,
-        "outDir": "./dist",
+        "outDir": "dist",
         "baseUrl": ".", // This must be specified if "paths" is.
         "paths": {
             "config": ["config/index"],
-            "constants": ["src/constants"],
-            "models": ["src/models/index"]
         },
         "types": [
             "node",
@@ -37,13 +35,13 @@
             "DOM"
         ]
     },
-    "include": [
-        "src/**/*.ts"
-    ],
     "exclude": [
         "node_modules",
+        "migrations",
+        "seeds",
+        "tsoa",
         "**/*.test.ts",
-        "build",
+        "dist",
         "tests",
         "tsoa/tsoa-template.ts"
     ]

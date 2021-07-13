@@ -14,7 +14,7 @@ class AuthorizationInputValidationSchema {
       .custom((apiKey, helpers) => {
         const config: Config = Container.get(Config);
         // todo: extract key
-        const testApiKey = config.api.apiKey;;
+        const testApiKey = config.api.apiKey;
         const validationResult: ValidationResult = this.apiKeySchema.validate(testApiKey);
 
         if (validationResult.error) {
@@ -43,13 +43,13 @@ class AuthorizationInputValidationSchema {
         if (!/^Bearer$/i.test(scheme)) {
           return helpers.error('any.custom', new UnauthorizedError(ERROR_MESSAGES.InvalidToken));
         }
-        return true
+        return true;
       })
       .error(new UnauthorizedError(ERROR_MESSAGES.InvalidToken));
   }
 
   private static handleError(errors: any[]) {
-    errors = errors.filter((error: { local: any; }) => error.local instanceof UnauthorizedError);
+    errors = errors.filter((error: { local: any }) => error.local instanceof UnauthorizedError);
 
     return errors.length ? errors[0].local : new UnauthorizedError(ERROR_MESSAGES.InvalidApiKey);
   }

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ConflictError, NotFoundError, BadInputError, UnauthorizedError, ForbiddenError } from '../../utils/errors';
 import { ERROR_MESSAGES } from '../../constants/error';
-import { BAD_REQUEST, CONFLICT, NOT_FOUND, INTERNAL_SERVER_ERROR, UNAUTHORIZED, FORBIDDEN } from 'http-status-codes';
+import statusCode from 'http-status-codes';
 import { IErrorMessage } from '../../models';
 import { log } from '../../services/logService';
 
@@ -14,9 +14,9 @@ function sendError(res: Response, message: IErrorMessage, status: number) {
 
 function handleError(
   err: ConflictError | NotFoundError | BadInputError,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) {
   const message: IErrorMessage = {
     code: 0,
@@ -26,19 +26,19 @@ function handleError(
 
   switch (true) {
     case err instanceof BadInputError:
-      sendError(res, message, BAD_REQUEST);
+      sendError(res, message, statusCode.BAD_REQUEST);
       break;
     case err instanceof ConflictError:
-      sendError(res, message, CONFLICT);
+      sendError(res, message, statusCode.CONFLICT);
       break;
     case err instanceof NotFoundError:
-      sendError(res, message, NOT_FOUND);
+      sendError(res, message, statusCode.NOT_FOUND);
       break;
     case err instanceof UnauthorizedError:
-      sendError(res, message, UNAUTHORIZED);
+      sendError(res, message, statusCode.UNAUTHORIZED);
       break;
     case err instanceof ForbiddenError:
-      sendError(res, message, FORBIDDEN);
+      sendError(res, message, statusCode.FORBIDDEN);
       break;
     default:
       sendError(
@@ -47,7 +47,7 @@ function handleError(
           code: 0,
           message: ERROR_MESSAGES.Unknown,
         },
-        INTERNAL_SERVER_ERROR,
+        statusCode.INTERNAL_SERVER_ERROR,
       );
       break;
   }

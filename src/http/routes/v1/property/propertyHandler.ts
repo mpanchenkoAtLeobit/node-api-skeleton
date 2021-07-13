@@ -5,21 +5,22 @@ import { PropertysValidator } from './propertyValidator';
 import { IProperty, IPropertyUpsertData } from '../../../../models/property';
 import { IErrorMessage } from '../../../../models';
 
-@Route('v1/menu_badge')
+@Route('v1/property')
 @Tags('Property')
 class PropertyHandler extends Controller {
   @Inject private controller!: PropertyController;
   @Inject private validator!: PropertysValidator;
 
   @Get()
-  @OperationId('getPropertysList')
-  @Security('jwt', [])
+  @OperationId('getPropertiesList')
+  @Security('api_key')
   getList() {
     return this.controller.getList();
   }
 
   @Get('{id}')
   @OperationId('getProperty')
+  @Security('api_key')
   get(id: string) {
     const propertyId = Number.parseInt(id, 10);
     this.validator.validateIdInput(propertyId);
@@ -29,7 +30,7 @@ class PropertyHandler extends Controller {
 
   @Post()
   @OperationId('createProperty')
-  @Security('jwt', [])
+  @Security('api_key')
   @Response<IErrorMessage>(400, 'Bad request')
   create(@Body() body: IPropertyUpsertData): Promise<IProperty[]> {
     this.validator.validateCreateInput(body);
@@ -39,7 +40,7 @@ class PropertyHandler extends Controller {
 
   @Put('{id}')
   @OperationId('updateProperty')
-  @Security('jwt', [])
+  @Security('api_key')
   @Response<IErrorMessage>(400, 'Bad request')
   @Response<IErrorMessage>(404, 'Not found')
   update(id: string, @Body() body: IPropertyUpsertData): Promise<IProperty[]> {
@@ -51,7 +52,7 @@ class PropertyHandler extends Controller {
 
   @Delete('{id}')
   @OperationId('deleteProperty')
-  @Security('jwt', [])
+  @Security('api_key')
   @Response<IErrorMessage>(404, 'Not found')
   delete(id: string): Promise<number[]> {
     const propertyId = Number.parseInt(id, 10);

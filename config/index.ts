@@ -26,7 +26,6 @@ interface RabbitConfig {
 }
 
 interface ApiConfig {
-    url: string,
     apiKey: string
 }
 
@@ -67,7 +66,6 @@ class Config {
         };
         this.service = ConfigUtils.getAsString('SERVICE', 'Api Service');
         this.api = {
-            url: ConfigUtils.getAsString('API_BASE_URL', 'http://localhost:5000'),
             apiKey: ConfigUtils.getAsString('API_KEY', 'API_KEY')
         };
         this.cors = {

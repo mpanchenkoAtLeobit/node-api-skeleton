@@ -22,12 +22,12 @@ abstract class BaseKnexResource<T> extends Base {
   }
 
   protected extendFiltering(filters: IDataProperties = {}): IDataProperties {
-    return Object.keys(filters).reduce((acc, key) => {
+    return Object.keys(filters).reduce((acc: IDataProperties, key: string) => {
       if (Object.prototype.hasOwnProperty.call(filters, key) && !_.isUndefined(filters[key])) {
         if (!key.includes('.')) {
-          acc[`${this.tableName}.${key}`] = filters[key];
+          (acc as IDataProperties)[`${this.tableName}.${key}`] = filters[key];
         } else {
-          acc[key] = filters[key];
+          (acc as IDataProperties)[key] = filters[key];
         }
       }
       return acc;

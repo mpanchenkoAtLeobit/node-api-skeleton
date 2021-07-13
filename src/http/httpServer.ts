@@ -3,13 +3,14 @@ import cors from 'cors';
 import { Server } from 'http';
 import { Base } from '../base';
 import bodyParser from 'body-parser';
-import { Config } from 'config';
+import { Config } from '../../config';
 import { handleError } from './middleware/handleError';
 import { Inject, Singleton } from 'typescript-ioc';
 import swaggerUI from 'swagger-ui-express';
+// eslint-disable-line 
 import swaggerJSON from '../../tsoa/swagger.json';
 import { KnexService } from '../services/knexService';
-import { RedisService } from '../services/redisService';
+//import { RedisService } from '../services/redisService';
 import { ConfigUtils } from '../../config/utils';
 /* tslint:disable */
 import './routes/v1/property/propertyHandler';
@@ -23,7 +24,7 @@ class HttpServer extends Base {
   private server?: Server;
   readonly port: number;
 
-  constructor(@Inject config: Config, @Inject knexService: KnexService, @Inject redisService: RedisService) {
+  constructor(@Inject config: Config, @Inject knexService: KnexService, /*@Inject redisService: RedisService*/) {
     super(__filename);
 
     this.router = express();
@@ -41,16 +42,16 @@ class HttpServer extends Base {
       this.router.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON));
     }
 
-    this.router.use('/health', async (req, res) => {
+    this.router.use('/health', async (_req, res) => {
       try {
         await knexService.ping();
-        await redisService.ping();
+        //await redisService.ping();
         res.send('OK');
       } catch (e) {
         res.status(500).send(e.message);
       }
     });
-    this.router.use('/', async (req, res) => {
+    this.router.use('/', async (_req, res) => {
       res.send(config.service);
     });
     this.router.use(handleError);

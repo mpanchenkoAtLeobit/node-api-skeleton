@@ -1,4 +1,4 @@
-import { Config, IDbConnection } from 'config';
+import { Config, IDbConnection } from '../../config';
 import knex, { Knex } from 'knex';
 import { Inject, Singleton } from 'typescript-ioc';
 

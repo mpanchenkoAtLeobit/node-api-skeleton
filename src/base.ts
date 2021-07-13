@@ -1,7 +1,7 @@
 abstract class Base {
   protected devConsole: Console;
 
-  protected constructor(filename: string) {
+  protected constructor(_filename: string) {
     this.devConsole = console;
   }
 }

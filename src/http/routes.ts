@@ -1,43 +1,64 @@
 /* tslint:disable */
-import { Controller, ValidateParam, FieldErrors, ValidateError, TsoaRoute } from 'tsoa';
+/* eslint-disable */
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse } from '@tsoa/runtime';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { PropertyHandler } from './routes/v1/property/propertyHandler';
-import { authenticateMiddleware } from './middleware/authentication';
+import { expressAuthentication } from './middleware/authentication';
+import * as express from 'express';
+
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
     "IProperty": {
+        "dataType": "refObject",
         "properties": {
-            "id": { "dataType": "double", "required": true },
-            "createdAt": { "dataType": "datetime", "required": true },
-            "updatedAt": { "dataType": "datetime", "required": true },
-            "text": { "dataType": "string", "required": true },
+            "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "text": {"dataType":"string","required":true},
         },
-        "additionalProperties": true,
+        "additionalProperties": false,
     },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IErrorMessage": {
+        "dataType": "refObject",
         "properties": {
-            "code": { "dataType": "double", "required": true },
-            "message": { "dataType": "string", "required": true },
+            "code": {"dataType":"double","required":true},
+            "message": {"dataType":"string","required":true},
         },
-        "additionalProperties": true,
+        "additionalProperties": false,
     },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IPropertyUpsertData": {
+        "dataType": "refObject",
         "properties": {
-            "text": { "dataType": "string", "required": true },
+            "text": {"dataType":"string","required":true},
         },
-        "additionalProperties": true,
+        "additionalProperties": false,
     },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
+const validationService = new ValidationService(models);
 
-export function RegisterRoutes(app: any) {
-    app.get('/api/v1/menu_badge',
-        authenticateMiddleware([{ "jwt": ["KITCHEN", "TRUCK", "ADMIN", "SUPER_ADMIN", "DEBUG", "KITCHEN_STAFF", "MANAGER", "PRODUCT", "MARKETING"] }]),
-        function(request: any, response: any, next: any) {
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+export function RegisterRoutes(app: express.Router) {
+    // ###########################################################################################################
+    //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
+    //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
+    // ###########################################################################################################
+        app.get('/api/v1/property',
+            authenticateMiddleware([{"api_key":[]}]),
+            function PropertyHandler_getList(request: any, response: any, next: any) {
             const args = {
             };
 
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request);
+                validatedArgs = getValidatedArgs(args, request, response);
             } catch (err) {
                 return next(err);
             }
@@ -46,38 +67,21 @@ export function RegisterRoutes(app: any) {
 
 
             const promise = controller.getList.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
+            promiseHandler(controller, promise, response, undefined, next);
         });
-    if ('/api/v1/menu_badge'.includes('_')) {
-        app.get('/api/v1/menu_badge'.replace('_', '-'),
-            authenticateMiddleware([{ "jwt": ["KITCHEN", "TRUCK", "ADMIN", "SUPER_ADMIN", "DEBUG", "KITCHEN_STAFF", "MANAGER", "PRODUCT", "MARKETING"] }]),
-            function(request: any, response: any, next: any) {
-                const args = {
-                };
-
-                let validatedArgs: any[] = [];
-                try {
-                    validatedArgs = getValidatedArgs(args, request);
-                } catch (err) {
-                    return next(err);
-                }
-
-                const controller = new PropertyHandler();
-
-
-                const promise = controller.getList.apply(controller, validatedArgs as any);
-                promiseHandler(controller, promise, response, next);
-            });
-    }
-    app.get('/api/v1/menu_badge/:id',
-        function(request: any, response: any, next: any) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/api/v1/property/:id',
+            authenticateMiddleware([{"api_key":[]}]),
+            function PropertyHandler_get(request: any, response: any, next: any) {
             const args = {
-                id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
+                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
             };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request);
+                validatedArgs = getValidatedArgs(args, request, response);
             } catch (err) {
                 return next(err);
             }
@@ -86,39 +90,21 @@ export function RegisterRoutes(app: any) {
 
 
             const promise = controller.get.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
+            promiseHandler(controller, promise, response, undefined, next);
         });
-    if ('/api/v1/menu_badge/:id'.includes('_')) {
-        app.get('/api/v1/menu_badge/:id'.replace('_', '-'),
-            function(request: any, response: any, next: any) {
-                const args = {
-                    id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
-                };
-
-                let validatedArgs: any[] = [];
-                try {
-                    validatedArgs = getValidatedArgs(args, request);
-                } catch (err) {
-                    return next(err);
-                }
-
-                const controller = new PropertyHandler();
-
-
-                const promise = controller.get.apply(controller, validatedArgs as any);
-                promiseHandler(controller, promise, response, next);
-            });
-    }
-    app.post('/api/v1/menu_badge',
-        authenticateMiddleware([{ "jwt": ["KITCHEN", "TRUCK", "ADMIN", "SUPER_ADMIN", "DEBUG", "PRODUCT", "MARKETING"] }]),
-        function(request: any, response: any, next: any) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/api/v1/property',
+            authenticateMiddleware([{"api_key":[]}]),
+            function PropertyHandler_create(request: any, response: any, next: any) {
             const args = {
-                body: { "in": "body", "name": "body", "required": true, "ref": "IPropertyUpsertData" },
+                    body: {"in":"body","name":"body","required":true,"ref":"IPropertyUpsertData"},
             };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request);
+                validatedArgs = getValidatedArgs(args, request, response);
             } catch (err) {
                 return next(err);
             }
@@ -127,41 +113,22 @@ export function RegisterRoutes(app: any) {
 
 
             const promise = controller.create.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
+            promiseHandler(controller, promise, response, undefined, next);
         });
-    if ('/api/v1/menu_badge'.includes('_')) {
-        app.post('/api/v1/menu_badge'.replace('_', '-'),
-            authenticateMiddleware([{ "jwt": ["KITCHEN", "TRUCK", "ADMIN", "SUPER_ADMIN", "DEBUG", "PRODUCT", "MARKETING"] }]),
-            function(request: any, response: any, next: any) {
-                const args = {
-                    body: { "in": "body", "name": "body", "required": true, "ref": "IPropertyUpsertData" },
-                };
-
-                let validatedArgs: any[] = [];
-                try {
-                    validatedArgs = getValidatedArgs(args, request);
-                } catch (err) {
-                    return next(err);
-                }
-
-                const controller = new PropertyHandler();
-
-
-                const promise = controller.create.apply(controller, validatedArgs as any);
-                promiseHandler(controller, promise, response, next);
-            });
-    }
-    app.put('/api/v1/menu_badge/:id',
-        authenticateMiddleware([{ "jwt": ["KITCHEN", "TRUCK", "ADMIN", "SUPER_ADMIN", "DEBUG", "PRODUCT", "MARKETING"] }]),
-        function(request: any, response: any, next: any) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/api/v1/property/:id',
+            authenticateMiddleware([{"api_key":[]}]),
+            function PropertyHandler_update(request: any, response: any, next: any) {
             const args = {
-                id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
-                body: { "in": "body", "name": "body", "required": true, "ref": "IPropertyUpsertData" },
+                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                    body: {"in":"body","name":"body","required":true,"ref":"IPropertyUpsertData"},
             };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request);
+                validatedArgs = getValidatedArgs(args, request, response);
             } catch (err) {
                 return next(err);
             }
@@ -170,41 +137,21 @@ export function RegisterRoutes(app: any) {
 
 
             const promise = controller.update.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
+            promiseHandler(controller, promise, response, undefined, next);
         });
-    if ('/api/v1/menu_badge/:id'.includes('_')) {
-        app.put('/api/v1/menu_badge/:id'.replace('_', '-'),
-            authenticateMiddleware([{ "jwt": ["KITCHEN", "TRUCK", "ADMIN", "SUPER_ADMIN", "DEBUG", "PRODUCT", "MARKETING"] }]),
-            function(request: any, response: any, next: any) {
-                const args = {
-                    id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
-                    body: { "in": "body", "name": "body", "required": true, "ref": "IPropertyUpsertData" },
-                };
-
-                let validatedArgs: any[] = [];
-                try {
-                    validatedArgs = getValidatedArgs(args, request);
-                } catch (err) {
-                    return next(err);
-                }
-
-                const controller = new PropertyHandler();
-
-
-                const promise = controller.update.apply(controller, validatedArgs as any);
-                promiseHandler(controller, promise, response, next);
-            });
-    }
-    app.delete('/api/v1/menu_badge/:id',
-        authenticateMiddleware([{ "jwt": ["KITCHEN", "TRUCK", "ADMIN", "SUPER_ADMIN", "DEBUG"] }]),
-        function(request: any, response: any, next: any) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.delete('/api/v1/property/:id',
+            authenticateMiddleware([{"api_key":[]}]),
+            function PropertyHandler_delete(request: any, response: any, next: any) {
             const args = {
-                id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
+                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
             };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request);
+                validatedArgs = getValidatedArgs(args, request, response);
             } catch (err) {
                 return next(err);
             }
@@ -213,73 +160,148 @@ export function RegisterRoutes(app: any) {
 
 
             const promise = controller.delete.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
+            promiseHandler(controller, promise, response, undefined, next);
         });
-    if ('/api/v1/menu_badge/:id'.includes('_')) {
-        app.delete('/api/v1/menu_badge/:id'.replace('_', '-'),
-            authenticateMiddleware([{ "jwt": ["KITCHEN", "TRUCK", "ADMIN", "SUPER_ADMIN", "DEBUG"] }]),
-            function(request: any, response: any, next: any) {
-                const args = {
-                    id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
-                };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
-                let validatedArgs: any[] = [];
-                try {
-                    validatedArgs = getValidatedArgs(args, request);
-                } catch (err) {
-                    return next(err);
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+    function authenticateMiddleware(security: TsoaRoute.Security[] = []) {
+        return function runAuthenticationMiddleware(request: any, _response: any, next: any) {
+            let responded = 0;
+            let success = false;
+
+            const succeed = function(user: any) {
+                if (!success) {
+                    success = true;
+                    responded++;
+                    request['user'] = user;
+                    next();
                 }
+            }
 
-                const controller = new PropertyHandler();
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
+            const fail = function(error: any) {
+                responded++;
+                if (responded == security.length && !success) {
+                    error.status = error.status || 401;
+                    next(error)
+                }
+            }
 
-                const promise = controller.delete.apply(controller, validatedArgs as any);
-                promiseHandler(controller, promise, response, next);
-            });
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            for (const secMethod of security) {
+                if (Object.keys(secMethod).length > 1) {
+                    let promises: Promise<any>[] = [];
+
+                    for (const name in secMethod) {
+                        promises.push(expressAuthentication(request, name, secMethod[name]));
+                    }
+
+                    Promise.all(promises)
+                        .then((users) => { succeed(users[0]); })
+                        .catch(fail);
+                } else {
+                    for (const name in secMethod) {
+                        expressAuthentication(request, name, secMethod[name])
+                            .then(succeed)
+                            .catch(fail);
+                    }
+                }
+            }
+        }
     }
 
-    function promiseHandler(controllerObj: any, promise: any, response: any, next: any) {
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+    function isController(object: any): object is Controller {
+        return 'getHeaders' in object && 'getStatus' in object && 'setStatus' in object;
+    }
+
+    function promiseHandler(controllerObj: any, promise: any, response: any, successStatus: any, next: any) {
         return Promise.resolve(promise)
             .then((data: any) => {
-                let statusCode;
-                if (controllerObj instanceof Controller) {
-                    const controller = controllerObj as Controller
-                    const headers = controller.getHeaders();
-                    Object.keys(headers).forEach((name: string) => {
-                        response.set(name, headers[name]);
-                    });
-
-                    statusCode = controller.getStatus();
+                let statusCode = successStatus;
+                let headers;
+                if (isController(controllerObj)) {
+                    headers = controllerObj.getHeaders();
+                    statusCode = controllerObj.getStatus() || statusCode;
                 }
 
-                if (data || data === false) {
-                    response.status(statusCode || 200).json(data);
-                } else {
-                    response.status(statusCode || 204).end();
-                }
+                // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+                returnHandler(response, statusCode, data, headers)
             })
             .catch((error: any) => next(error));
     }
 
-    function getValidatedArgs(args: any, request: any): any[] {
-        const values = Object.keys(args).map(function(key) {
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+    function returnHandler(response: any, statusCode?: number, data?: any, headers: any = {}) {
+        if (response.headersSent) {
+            return;
+        }
+        Object.keys(headers).forEach((name: string) => {
+            response.set(name, headers[name]);
+        });
+        if (data && typeof data.pipe === 'function' && data.readable && typeof data._read === 'function') {
+            data.pipe(response);
+        } else if (data !== null && data !== undefined) {
+            response.status(statusCode || 200).json(data);
+        } else {
+            response.status(statusCode || 204).end();
+        }
+    }
+
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+    function responder(response: any): TsoaResponse<HttpStatusCodeLiteral, unknown>  {
+        return function(status, data, headers) {
+            returnHandler(response, status, data, headers);
+        };
+    };
+
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+    function getValidatedArgs(args: any, request: any, response: any): any[] {
+        const fieldErrors: FieldErrors  = {};
+        const values = Object.keys(args).map((key) => {
             const name = args[key].name;
             switch (args[key].in) {
                 case 'request':
                     return request;
                 case 'query':
-                    return request.query[name];
+                    return validationService.ValidateParam(args[key], request.query[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"silently-remove-extras"});
                 case 'path':
-                    return request.params[name];
+                    return validationService.ValidateParam(args[key], request.params[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"silently-remove-extras"});
                 case 'header':
-                    return request.header(name);
+                    return validationService.ValidateParam(args[key], request.header(name), name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"silently-remove-extras"});
                 case 'body':
-                    return request.body;
+                    return validationService.ValidateParam(args[key], request.body, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"silently-remove-extras"});
                 case 'body-prop':
-                    return request.body[name];
+                    return validationService.ValidateParam(args[key], request.body[name], name, fieldErrors, 'body.', {"noImplicitAdditionalProperties":"silently-remove-extras"});
+                case 'formData':
+                    if (args[key].dataType === 'file') {
+                        return validationService.ValidateParam(args[key], request.file, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"silently-remove-extras"});
+                    } else if (args[key].dataType === 'array' && args[key].array.dataType === 'file') {
+                        return validationService.ValidateParam(args[key], request.files, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"silently-remove-extras"});
+                    } else {
+                        return validationService.ValidateParam(args[key], request.body[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"silently-remove-extras"});
+                    }
+                case 'res':
+                    return responder(response);
             }
         });
 
+        if (Object.keys(fieldErrors).length > 0) {
+            throw new ValidateError(fieldErrors, '');
+        }
         return values;
     }
+
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 }
+
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
